@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import Header from "@/components/portfolio/Header";
 import Hero from "@/components/portfolio/Hero";
 import About from "@/components/portfolio/About";
@@ -9,9 +10,17 @@ import Highlights from "@/components/portfolio/Highlights";
 import Contact from "@/components/portfolio/Contact";
 import Footer from "@/components/portfolio/Footer";
 
+// Lazy load Three.js component for better performance
+const ParticleBackground = lazy(() => import("@/components/portfolio/ParticleBackground"));
+
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      {/* Three.js Particle Background */}
+      <Suspense fallback={null}>
+        <ParticleBackground />
+      </Suspense>
+      
       <Header />
       <main>
         <Hero />
