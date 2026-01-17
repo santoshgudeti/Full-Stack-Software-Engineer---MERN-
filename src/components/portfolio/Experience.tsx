@@ -1,5 +1,4 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
 
@@ -11,22 +10,26 @@ const experiences = [
     period: "Feb 2025 – Present",
     type: "Full-time",
     responsibilities: [
-      "Owned end-to-end development of enterprise recruitment platform features using React, Node.js, Express, MongoDB, and Python-based AI services (FastAPI)",
-      "Designed and implemented RESTful APIs and backend services supporting resume processing, candidate workflows, and HR operations",
-      "Built AI-driven evaluation pipelines integrating LLM inference, semantic scoring logic, embeddings, vector search, and asynchronous job queues",
-      "Developed real-time features using WebSockets and Socket.IO for live assessments and dashboards",
-      "Optimized APIs, AI inference paths, data models, and background workers for performance, reliability, and scalability",
+      "Developed and enhanced full stack features for an enterprise recruitment platform using React, Node.js, Express, and MongoDB",
+      "Designed and implemented RESTful APIs for candidate onboarding, assessments, job management, and HR dashboard workflows",
+      "Built end-to-end assessment modules combining MCQ-based tests and video evaluations with consistent UI state management",
+      "Integrated external AI evaluation services to process audio, video, and text responses and consume structured evaluation outputs",
+      "Automated consolidated assessment report generation and enabled delivery of results to HR stakeholders",
+      "Implemented offer letter generation using configurable templates with automated PDF output",
+      "Enabled external job posting by generating public job links for platforms such as LinkedIn and Naukri",
+      "Implemented real-time status updates using Socket.IO to synchronize assessment and dashboard data across users",
     ],
   },
   {
-    title: "Frontend Developer",
+    title: "Frontend Developer Intern",
     company: "Cognitbotz",
     location: "Hyderabad",
     period: "Oct 2024 – Feb 2025",
     type: "Internship",
     responsibilities: [
-      "Developed responsive, reusable UI components using React, Bootstrap, and modern CSS practices",
-      "Integrated frontend workflows with backend APIs, authentication, and role-based access control",
+      "Developed responsive and reusable UI components using React and Bootstrap",
+      "Integrated frontend components with backend APIs and authentication workflows",
+      "Improved UI consistency, accessibility, and cross-device responsiveness through iterative enhancements",
     ],
   },
 ];
@@ -36,12 +39,12 @@ const Experience = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="experience" className="py-24 relative bg-secondary/20" ref={ref}>
+    <section id="experience" className="py-24 relative bg-secondary/30" ref={ref}>
       <div className="section-container">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
           {/* Section header */}
           <div className="flex items-center gap-4 mb-12">
@@ -53,20 +56,18 @@ const Experience = () => {
           {/* Timeline */}
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-border/50 md:-translate-x-px" />
+            <div className="absolute left-0 md:left-8 top-0 bottom-0 w-px bg-border/50" />
 
             {experiences.map((exp, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className={`relative pl-8 md:pl-0 pb-12 last:pb-0 ${
-                  index % 2 === 0 ? "md:pr-[calc(50%+2rem)]" : "md:pl-[calc(50%+2rem)]"
-                }`}
+                transition={{ duration: 0.4, delay: index * 0.15 }}
+                className="relative pl-8 md:pl-20 pb-12 last:pb-0"
               >
                 {/* Timeline dot */}
-                <div className="absolute left-0 md:left-1/2 top-0 w-3 h-3 rounded-full bg-primary border-4 border-background md:-translate-x-1.5 animate-glow-pulse" />
+                <div className="absolute left-0 md:left-8 top-0 w-3 h-3 rounded-full bg-primary border-4 border-background -translate-x-[5px]" />
 
                 <div className="glass-card p-6">
                   {/* Header */}
@@ -78,7 +79,7 @@ const Experience = () => {
                         <span>{exp.company}</span>
                       </div>
                     </div>
-                    <span className="px-3 py-1 text-xs font-medium rounded-full bg-primary/20 text-primary">
+                    <span className="px-3 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary border border-primary/20">
                       {exp.type}
                     </span>
                   </div>

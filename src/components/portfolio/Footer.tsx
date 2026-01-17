@@ -22,7 +22,7 @@ const Footer = () => {
               G. Santosh
             </a>
             <p className="text-sm text-muted-foreground mt-2">
-              Full Stack Software Engineer specializing in Applied AI & Real-Time Systems
+              Full Stack Software Engineer (MERN Stack)
             </p>
           </div>
 
