@@ -28,9 +28,8 @@ const Header = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "glass-card border-b border-border/50" : ""
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "glass-card border-b border-border/50" : ""
+        }`}
     >
       <nav className="section-container py-4">
         <div className="flex items-center justify-between">
@@ -46,7 +45,7 @@ const Header = () => {
               </a>
             ))}
             <a
-              href="/resume.pdf"
+              href="resume.pdf"
               className="btn-secondary text-sm py-2 px-4"
               target="_blank"
               rel="noopener noreferrer"
@@ -85,7 +84,7 @@ const Header = () => {
                 </a>
               ))}
               <a
-                href="/resume.pdf"
+                href="resume.pdf"
                 className="btn-secondary text-sm py-2 px-4 w-fit"
                 target="_blank"
                 rel="noopener noreferrer"

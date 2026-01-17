@@ -16,14 +16,14 @@ const Hero = () => {
   const socialLinks = [
     { icon: Linkedin, href: "https://www.linkedin.com/in/santosh-guddeti-929668216", label: "LinkedIn" },
     { icon: Github, href: "https://github.com/santoshgudeti", label: "GitHub" },
-    { icon: Globe, href: "https://applied-ai-showcase.lovable.app/", label: "Portfolio" },
+    { icon: Globe, href: "https://santoshgudeti.github.io/Full-Stack-Software-Engineer---MERN-/", label: "Portfolio" },
     { icon: Mail, href: "mailto:santoshgudeti@gmail.com", label: "Email" },
   ];
 
   return (
     <section ref={containerRef} className="min-h-screen flex flex-col justify-center relative overflow-hidden pt-20">
       {/* Subtle background gradient */}
-      <motion.div 
+      <motion.div
         className="absolute inset-0 pointer-events-none"
         style={{ y, opacity }}
       >
@@ -31,7 +31,7 @@ const Hero = () => {
         <div className="absolute bottom-1/3 left-1/4 w-[300px] h-[300px] bg-accent/5 rounded-full blur-[80px]" />
       </motion.div>
 
-      <motion.div 
+      <motion.div
         className="section-container relative z-10"
         style={{ opacity }}
       >
@@ -99,7 +99,7 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="text-base text-muted-foreground max-w-xl mb-8 leading-relaxed"
             >
-              Building production-ready web applications with React, Node.js, Express, and MongoDB. 
+              Building production-ready web applications with React, Node.js, Express, and MongoDB.
               Experienced in real-time updates, API development, and integrating external AI evaluation services.
             </motion.p>
 
@@ -134,7 +134,7 @@ const Hero = () => {
               className="flex flex-wrap gap-4 mb-8"
             >
               <a
-                href="/resume.pdf"
+                href="resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary inline-flex items-center gap-2"
@@ -186,7 +186,7 @@ const Hero = () => {
             <div className="relative">
               {/* Subtle glow */}
               <div className="absolute -inset-4 bg-primary/10 rounded-full blur-2xl" />
-              
+
               {/* Image container */}
               <div className="relative w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-2 border-border/50">
                 <img
@@ -217,8 +217,8 @@ const Hero = () => {
         transition={{ delay: 1.2, duration: 0.5 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
-        <motion.a 
-          href="#about" 
+        <motion.a
+          href="#about"
           className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}

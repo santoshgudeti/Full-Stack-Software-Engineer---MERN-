@@ -9,7 +9,7 @@ const Contact = () => {
   const socialLinks = [
     { icon: Linkedin, href: "https://www.linkedin.com/in/santosh-guddeti-929668216", label: "LinkedIn" },
     { icon: Github, href: "https://github.com/santoshgudeti", label: "GitHub" },
-    { icon: Globe, href: "https://applied-ai-showcase.lovable.app/", label: "Portfolio" },
+    { icon: Globe, href: "https://santoshgudeti.github.io/Full-Stack-Software-Engineer---MERN-/", label: "Portfolio" },
     { icon: Mail, href: "mailto:santoshgudeti@gmail.com", label: "Email" },
   ];
 
@@ -38,7 +38,7 @@ const Contact = () => {
           </h2>
 
           <p className="text-lg text-muted-foreground mb-10 max-w-xl mx-auto">
-            I'm currently open to new opportunities. Whether you have a question 
+            I'm currently open to new opportunities. Whether you have a question
             or just want to say hi, I'll do my best to get back to you!
           </p>
 
@@ -51,9 +51,9 @@ const Contact = () => {
               <Mail size={18} />
               Say Hello
             </a>
-            
+
             <a
-              href="/resume.pdf"
+              href="resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary inline-flex items-center gap-2"
