@@ -11,10 +11,8 @@ const education = {
 };
 
 const certifications = [
-  { name: "Oracle Certified Associate — Java SE 8", issuer: "Oracle" },
+  { name: "Oracle Certified Associate – Java SE 8", issuer: "Oracle" },
   { name: "Google IT Support Certificate", issuer: "Google" },
-  { name: "Full Stack Web Development", issuer: "MyCaptain" },
-  { name: "Database Foundations", issuer: "Oracle Academy" },
 ];
 
 const Education = () => {

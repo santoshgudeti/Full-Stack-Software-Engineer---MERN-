@@ -16,8 +16,6 @@ const experiences = [
       "Integrated external AI evaluation services to process audio, video, and text responses and consume structured evaluation outputs",
       "Automated consolidated assessment report generation and enabled delivery of results to HR stakeholders",
       "Implemented offer letter generation using configurable templates with automated PDF output",
-      "Enabled external job posting by generating public job links for platforms such as LinkedIn and Naukri",
-      "Implemented real-time status updates using Socket.IO to synchronize assessment and dashboard data across users",
     ],
   },
   {
