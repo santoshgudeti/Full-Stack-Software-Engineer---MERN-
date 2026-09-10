@@ -1,43 +1,23 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { ExternalLink, Github, ChevronRight } from "lucide-react";
-import skillMatrixImage from "@/assets/skillmatrix-preview.jpg";
-import deliveryImage from "@/assets/delivery-preview.jpg";
+import { ExternalLink, Github, ChevronRight, Lock } from "lucide-react";
+import { ResponsiveImage } from "@/components/common/ResponsiveImage";
+import { sortedProjects, type Project } from "@/content";
 
-const projects = [
-  {
-    title: "SkillMatrix",
-    subtitle: "Applicant Tracking System",
-    description: "Enterprise Applicant Tracking System supporting end-to-end recruitment workflows",
-    image: skillMatrixImage,
-    techStack: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "shadcn/ui"],
-    highlights: [
-      "Contributed to the development of an enterprise ATS supporting end-to-end recruitment workflows",
-      "Implemented backend APIs for resume ingestion, candidate processing, job management, and result storage",
-      "Enforced role-based access control for HR and administrative users",
-      "Developed offer letter generation using customizable templates and automated document creation",
-      "Enabled public job postings through shareable job links",
-      "Integrated MCQ and voice-based question generation APIs into the assessment platform to support dynamic evaluation workflows",
-    ],
-    isCompanyProject: true,
-  },
-  {
-    title: "Live Delivery Tracking System",
-    subtitle: "Real-Time GPS Tracking Platform",
-    description: "Real-time delivery tracking system displaying live order status updates",
-    image: deliveryImage,
-    techStack: ["Next.js", "React", "TypeScript", "Node.js", "Socket.IO", "Redis", "MongoDB", "Google Maps APIs"],
-    highlights: [
-      "Built a real-time delivery tracking system to display live order status updates",
-      "Implemented event-driven communication using Socket.IO for server-to-client updates",
-      "Designed RESTful APIs for order management, user management, and delivery history",
-      "Ensured consistent state synchronization between frontend and backend during real-time updates",
-    ],
-    isCompanyProject: false,
-  },
-];
+const projects = sortedProjects();
 
-const ProjectCard = ({ project, index, isInView }: { project: typeof projects[0]; index: number; isInView: boolean }) => {
+const linkIcon = (kind: Project["links"][number]["kind"]) =>
+  kind === "source" ? Github : ExternalLink;
+
+const ProjectCard = ({
+  project,
+  index,
+  isInView,
+}: {
+  project: Project;
+  index: number;
+  isInView: boolean;
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -45,32 +25,57 @@ const ProjectCard = ({ project, index, isInView }: { project: typeof projects[0]
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.15 }}
-      className={`grid lg:grid-cols-2 gap-8 items-start ${index % 2 === 1 ? "lg:flex-row-reverse" : ""}`}
+      className="grid lg:grid-cols-2 gap-8 items-start"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Image */}
+      {/* Media */}
       <div className={`relative ${index % 2 === 1 ? "lg:order-2" : ""}`}>
         <div className="relative overflow-hidden rounded-xl border border-border/50">
-          <motion.img
-            src={project.image}
-            alt={project.title}
-            className="w-full aspect-video object-cover"
-            animate={{ scale: isHovered ? 1.02 : 1 }}
-            transition={{ duration: 0.3 }}
-          />
-          
-          {project.isCompanyProject && (
-            <div className="absolute top-4 right-4 px-3 py-1.5 text-xs font-medium rounded-full bg-primary/90 text-primary-foreground">
-              Company Project
+          {project.cover ? (
+            <motion.div
+              className="w-full aspect-video overflow-hidden"
+              animate={{ scale: isHovered ? 1.02 : 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ResponsiveImage
+                avif={project.cover.avif}
+                webp={project.cover.webp}
+                jpg={project.cover.jpg}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                width={1152}
+                height={648}
+                alt={project.cover.alt}
+                loading="lazy"
+                decoding="async"
+                fetchPriority="low"
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+          ) : (
+            <div className="w-full aspect-video flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-secondary via-card to-background">
+              <span className="text-4xl font-bold gradient-text">
+                {project.title
+                  .split(" ")
+                  .map((word) => word[0])
+                  .slice(0, 3)
+                  .join("")}
+              </span>
+              <span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
+                {project.domain}
+              </span>
             </div>
           )}
 
-          {!project.isCompanyProject && (
-            <div className="absolute top-4 right-4 px-3 py-1.5 text-xs font-medium rounded-full bg-secondary/90 text-foreground border border-border/50">
-              Personal Project
-            </div>
-          )}
+          <div
+            className={`absolute top-4 right-4 px-3 py-1.5 text-xs font-medium rounded-full ${
+              project.kind === "company"
+                ? "bg-primary/90 text-primary-foreground"
+                : "bg-secondary/90 text-foreground border border-border/50"
+            }`}
+          >
+            {project.kind === "company" ? "Company Project" : "Personal Project"}
+          </div>
         </div>
       </div>
 
@@ -80,53 +85,55 @@ const ProjectCard = ({ project, index, isInView }: { project: typeof projects[0]
           <ChevronRight size={14} />
           {project.subtitle}
         </p>
-        <h3 className="text-2xl sm:text-3xl font-bold mb-3">
-          {project.title}
-        </h3>
-        <p className="text-muted-foreground mb-6">{project.description}</p>
+        <h3 className="text-2xl sm:text-3xl font-bold mb-1">{project.title}</h3>
+        <p className="text-sm text-muted-foreground mb-4">
+          {project.org} · {project.year}
+        </p>
+        <p className="text-muted-foreground mb-6">{project.summary}</p>
 
-        {/* Highlights */}
         <ul className="space-y-2 mb-6">
           {project.highlights.map((highlight, i) => (
-            <li
-              key={i}
-              className="flex items-start gap-3 text-sm text-muted-foreground"
-            >
+            <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
               <span className="text-primary mt-0.5">▹</span>
               <span>{highlight}</span>
             </li>
           ))}
         </ul>
 
-        {/* Tech stack */}
         <div className="flex flex-wrap gap-2 mb-6">
-          {project.techStack.map((tech) => (
-            <span
-              key={tech}
-              className="tech-badge"
-            >
+          {project.stack.map((tech) => (
+            <span key={tech} className="tech-badge">
               {tech}
             </span>
           ))}
         </div>
 
-        {/* Links placeholder */}
-        <div className="flex gap-4">
-          <button 
-            className="btn-secondary text-sm py-2 px-4 opacity-50 cursor-not-allowed" 
-            disabled
-          >
-            <ExternalLink size={16} />
-            Live Demo
-          </button>
-          <button 
-            className="btn-secondary text-sm py-2 px-4 opacity-50 cursor-not-allowed" 
-            disabled
-          >
-            <Github size={16} />
-            Source Code
-          </button>
-        </div>
+        {project.links.length > 0 ? (
+          <div className="flex flex-wrap gap-4">
+            {project.links.map((link) => {
+              const LinkIcon = linkIcon(link.kind);
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary text-sm py-2 px-4"
+                >
+                  <LinkIcon size={16} />
+                  {link.label}
+                </a>
+              );
+            })}
+          </div>
+        ) : (
+          project.kind === "company" && (
+            <span className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground">
+              <Lock size={13} />
+              Proprietary — source not public
+            </span>
+          )
+        )}
       </div>
     </motion.div>
   );
@@ -154,11 +161,11 @@ const Projects = () => {
           {/* Projects */}
           <div className="space-y-16">
             {projects.map((project, index) => (
-              <ProjectCard 
-                key={project.title} 
-                project={project} 
-                index={index} 
-                isInView={isInView} 
+              <ProjectCard
+                key={project.slug}
+                project={project}
+                index={index}
+                isInView={isInView}
               />
             ))}
           </div>

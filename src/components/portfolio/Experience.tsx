@@ -1,36 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
-
-const experiences = [
-  {
-    title: "Full Stack Developer",
-    company: "Cognitbotz",
-    location: "Hyderabad",
-    period: "Feb 2025 – Present",
-    type: "Full-time",
-    responsibilities: [
-      "Developed and enhanced full stack features for an enterprise recruitment platform using React, Node.js, Express, and MongoDB",
-      "Designed and implemented RESTful APIs for candidate onboarding, assessments, job management, and HR dashboard workflows",
-      "Built end-to-end assessment modules combining MCQ-based tests and video evaluations with consistent UI state management",
-      "Integrated external AI evaluation services to process audio, video, and text responses and consume structured evaluation outputs",
-      "Automated consolidated assessment report generation and enabled delivery of results to HR stakeholders",
-      "Implemented offer letter generation using configurable templates with automated PDF output",
-    ],
-  },
-  {
-    title: "Frontend Developer Intern",
-    company: "Cognitbotz",
-    location: "Hyderabad",
-    period: "Oct 2024 – Feb 2025",
-    type: "Internship",
-    responsibilities: [
-      "Developed responsive and reusable UI components using React and Bootstrap",
-      "Integrated frontend components with backend APIs and authentication workflows",
-      "Improved UI consistency, accessibility, and cross-device responsiveness through iterative enhancements",
-    ],
-  },
-];
+import { experiences } from "@/content";
 
 const Experience = () => {
   const ref = useRef(null);
@@ -58,7 +29,7 @@ const Experience = () => {
 
             {experiences.map((exp, index) => (
               <motion.div
-                key={index}
+                key={exp.id}
                 initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.4, delay: index * 0.15 }}
@@ -71,7 +42,7 @@ const Experience = () => {
                   {/* Header */}
                   <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
                     <div>
-                      <h3 className="text-lg font-semibold text-foreground">{exp.title}</h3>
+                      <h3 className="text-lg font-semibold text-foreground">{exp.role}</h3>
                       <div className="flex items-center gap-2 text-primary font-medium">
                         <Briefcase size={14} />
                         <span>{exp.company}</span>
@@ -86,7 +57,7 @@ const Experience = () => {
                   <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-4">
                     <div className="flex items-center gap-1">
                       <Calendar size={14} />
-                      <span>{exp.period}</span>
+                      <span>{exp.displayPeriod}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <MapPin size={14} />
@@ -94,15 +65,20 @@ const Experience = () => {
                     </div>
                   </div>
 
-                  {/* Responsibilities */}
-                  <ul className="space-y-2">
-                    {exp.responsibilities.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <span className="text-primary mt-1">▹</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  {exp.draft ? (
+                    <p className="text-sm text-muted-foreground italic">
+                      {exp.summary} Detailed highlights coming soon.
+                    </p>
+                  ) : (
+                    <ul className="space-y-2">
+                      {exp.highlights.map((item, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                          <span className="text-primary mt-1">▹</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               </motion.div>
             ))}

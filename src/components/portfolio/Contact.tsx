@@ -1,22 +1,21 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Mail, Phone, MapPin, Linkedin, Github, Download, Globe } from "lucide-react";
+import { Mail, Phone, MapPin, Download } from "lucide-react";
+import { Icon } from "@/components/common/Icon";
+import { profile, site } from "@/content";
 
 const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const socialLinks = [
-    { icon: Linkedin, href: "https://www.linkedin.com/in/santosh-guddeti-929668216", label: "LinkedIn" },
-    { icon: Github, href: "https://github.com/santoshgudeti", label: "GitHub" },
-    { icon: Globe, href: "https://santoshgudeti.github.io/Full-Stack-Software-Engineer---MERN-/", label: "Portfolio" },
-    { icon: Mail, href: "mailto:santoshgudeti@gmail.com", label: "Email" },
-  ];
-
   const contactInfo = [
-    { icon: Mail, value: "santoshgudeti@gmail.com", href: "mailto:santoshgudeti@gmail.com" },
-    { icon: Phone, value: "+91 8309085060", href: "tel:+918309085060" },
-    { icon: MapPin, value: "Hyderabad, India", href: null },
+    { icon: Mail, value: profile.email, href: `mailto:${profile.email}` },
+    {
+      icon: Phone,
+      value: profile.phone,
+      href: `tel:${profile.phone.replace(/\s/g, "")}`,
+    },
+    { icon: MapPin, value: profile.location, href: null },
   ];
 
   return (
@@ -45,7 +44,7 @@ const Contact = () => {
           {/* CTA Buttons */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             <a
-              href="mailto:santoshgudeti@gmail.com"
+              href={`mailto:${profile.email}`}
               className="btn-primary inline-flex items-center gap-2"
             >
               <Mail size={18} />
@@ -53,7 +52,7 @@ const Contact = () => {
             </a>
 
             <a
-              href="resume.pdf"
+              href={site.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary inline-flex items-center gap-2"
@@ -93,16 +92,16 @@ const Contact = () => {
 
           {/* Social links */}
           <div className="flex justify-center gap-4 mt-10">
-            {socialLinks.map((link) => (
+            {profile.socials.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                target={link.label !== "Email" ? "_blank" : undefined}
-                rel={link.label !== "Email" ? "noopener noreferrer" : undefined}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
                 className="p-3 rounded-lg bg-secondary/50 border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-200"
                 aria-label={link.label}
               >
-                <link.icon size={20} />
+                <Icon name={link.icon} size={20} />
               </a>
             ))}
           </div>
@@ -110,7 +109,7 @@ const Contact = () => {
           {/* Availability badge */}
           <div className="mt-10 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-sm text-green-500">Currently available for opportunities</span>
+            <span className="text-sm text-green-500">{profile.availability.label}</span>
           </div>
         </motion.div>
       </div>

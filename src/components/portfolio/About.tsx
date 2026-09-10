@@ -1,13 +1,14 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Server, Globe, Zap } from "lucide-react";
-import profilePhoto from "@/assets/profile-photo.png";
-
-const expertiseAreas = [
-  { icon: Server, label: "Full Stack Development" },
-  { icon: Globe, label: "REST APIs" },
-  { icon: Zap, label: "Real-Time Systems" },
-];
+import profile320Avif from "@/assets/profile-320.avif";
+import profile320Webp from "@/assets/profile-320.webp";
+import profile320Jpg from "@/assets/profile-320.jpg";
+import profile640Avif from "@/assets/profile-640.avif";
+import profile640Webp from "@/assets/profile-640.webp";
+import profile640Jpg from "@/assets/profile-640.jpg";
+import { Icon } from "@/components/common/Icon";
+import { ResponsiveImage } from "@/components/common/ResponsiveImage";
+import { profile, yearsOfExperience } from "@/content";
 
 const About = () => {
   const ref = useRef(null);
@@ -54,47 +55,29 @@ const About = () => {
             {/* Text content - 3 columns */}
             <motion.div variants={itemVariants} className="lg:col-span-3 space-y-6">
               <p className="text-lg text-muted-foreground leading-relaxed">
-                <span className="text-foreground font-medium">Full Stack Software Engineer</span> with 
-                1.4+ years of hands-on experience building and maintaining production-ready web 
-                applications using the <span className="text-primary font-medium">MERN stack</span>.
-              </p>
-              
-              <p className="text-muted-foreground leading-relaxed">
-                Strong experience in developing RESTful APIs, integrating frontend and backend systems, 
-                and delivering end-to-end recruitment and workflow automation features. Experienced in 
-                real-time updates using WebSockets and integrating external AI-based evaluation services 
-                within enterprise applications.
+                <span className="text-foreground font-medium">{profile.headline}</span> with{" "}
+                {yearsOfExperience()}+ years shipping AI-driven applications across{" "}
+                <span className="text-primary font-medium">Fintech, HR Tech, and on-demand platforms</span>.
               </p>
 
-              <motion.ul className="space-y-3 ml-2">
-                {[
-                  "End-to-end feature development with React, Node.js, Express & MongoDB",
-                  "RESTful API design and backend service implementation",
-                  "Real-time communication using WebSockets and Socket.IO",
-                  "Integration of external AI evaluation services for assessments",
-                ].map((item, index) => (
-                  <motion.li
-                    key={index}
-                    className="flex items-start gap-3 text-muted-foreground"
-                    variants={itemVariants}
-                  >
-                    <span className="text-primary mt-1">▹</span>
-                    <span>{item}</span>
-                  </motion.li>
-                ))}
-              </motion.ul>
+              {profile.bio.map((paragraph, index) => (
+                <motion.p
+                  key={index}
+                  className="text-muted-foreground leading-relaxed"
+                  variants={itemVariants}
+                >
+                  {paragraph}
+                </motion.p>
+              ))}
 
-              {/* Expertise badges */}
-              <motion.div 
-                className="flex flex-wrap gap-3 pt-4"
-                variants={itemVariants}
-              >
-                {expertiseAreas.map((area) => (
+              {/* Focus areas */}
+              <motion.div className="flex flex-wrap gap-3 pt-4" variants={itemVariants}>
+                {profile.focusAreas.map((area) => (
                   <div
                     key={area.label}
                     className="flex items-center gap-2 px-4 py-2 bg-secondary/50 border border-border/50 rounded-full"
                   >
-                    <area.icon size={16} className="text-primary" />
+                    <Icon name={area.icon} size={16} className="text-primary" />
                     <span className="text-sm font-medium">{area.label}</span>
                   </div>
                 ))}
@@ -112,9 +95,25 @@ const About = () => {
                 
                 {/* Image container */}
                 <div className="relative aspect-square w-64 sm:w-72 rounded-lg overflow-hidden bg-background">
-                  <img
-                    src={profilePhoto}
-                    alt="G. Santosh"
+                  <ResponsiveImage
+                    avif={[
+                      [profile320Avif, 320],
+                      [profile640Avif, 640],
+                    ]}
+                    webp={[
+                      [profile320Webp, 320],
+                      [profile640Webp, 640],
+                    ]}
+                    jpg={[
+                      [profile320Jpg, 320],
+                      [profile640Jpg, 640],
+                    ]}
+                    sizes="(min-width: 640px) 288px, 256px"
+                    width={640}
+                    height={640}
+                    alt={profile.name}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-500"
                   />
                 </div>

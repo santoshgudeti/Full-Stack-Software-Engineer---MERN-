@@ -1,15 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, Download } from "lucide-react";
-
-const navItems = [
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
-  { label: "Education", href: "#education" },
-  { label: "Contact", href: "#contact" },
-];
+import { profile, site } from "@/content";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,18 +26,18 @@ const Header = () => {
       <nav className="section-container py-4">
         <div className="flex items-center justify-between">
           <a href="#" className="text-xl font-bold gradient-text">
-            GS
+            {profile.initials}
           </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <a key={item.href} href={item.href} className="nav-link text-sm">
+            {site.nav.map((item) => (
+              <a key={item.to} href={item.to} className="nav-link text-sm">
                 {item.label}
               </a>
             ))}
             <a
-              href="resume.pdf"
+              href={site.resumeUrl}
               className="btn-secondary text-sm py-2 px-4"
               target="_blank"
               rel="noopener noreferrer"
@@ -73,10 +65,10 @@ const Header = () => {
             className="md:hidden mt-4 pb-4"
           >
             <div className="flex flex-col gap-4">
-              {navItems.map((item) => (
+              {site.nav.map((item) => (
                 <a
-                  key={item.href}
-                  href={item.href}
+                  key={item.to}
+                  href={item.to}
                   className="nav-link text-sm py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -84,7 +76,7 @@ const Header = () => {
                 </a>
               ))}
               <a
-                href="resume.pdf"
+                href={site.resumeUrl}
                 className="btn-secondary text-sm py-2 px-4 w-fit"
                 target="_blank"
                 rel="noopener noreferrer"

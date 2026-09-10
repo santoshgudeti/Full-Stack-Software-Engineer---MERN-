@@ -1,0 +1,115 @@
+import type { Experience } from "./types";
+
+export const experiences: Experience[] = [
+  {
+    id: "cartrade-senior-engineer",
+    role: "Senior Engineer",
+    company: "CarTrade Tech",
+    companyUrl: "https://www.cartradetech.com",
+    location: "Kakinada, India",
+    start: "2026-07",
+    end: null,
+    displayPeriod: "Jul 2026 – Present",
+    type: "Full-time",
+    summary:
+      "Senior Engineer at CarTrade Tech, working across the platform's full stack.",
+    // TODO(content): awaiting real bullet points from Santosh.
+    // Until then `draft: true` makes the UI show an explicit "details coming soon"
+    // affordance rather than passing a vague placeholder off as a real achievement.
+    highlights: [],
+    stack: [],
+    draft: true,
+  },
+  {
+    id: "8byte-full-stack-engineer",
+    role: "Full Stack Engineer",
+    company: "8byte.ai",
+    location: "Hyderabad, India",
+    start: "2026-03",
+    end: "2026-06",
+    displayPeriod: "Mar 2026 – Jun 2026",
+    type: "Full-time",
+    summary:
+      "Multi-tenant Loan Origination System serving five independent lender brands from one codebase.",
+    highlights: [
+      "Built EMI calculation and Easebuzz payment integration for a multi-tenant LOS, cutting manual payment processing time by 60%.",
+      "Shipped the Reloan workflow, enabling 200+ fully repaid customers to reapply within the first two months of deployment.",
+      "Integrated the Signzy Email Domain API with PostgreSQL caching and composite indexing, eliminating 90% of redundant third-party calls.",
+      "Migrated 15GB+ of Account Aggregator data from PostgreSQL to AWS S3 in batches of 50, reducing database storage costs by 40%.",
+      "Designed workflow analytics across 10+ KYC steps (PAN → Aadhaar → Liveness → Income Proof), surfacing a 25% drop-off at bank verification for the product team.",
+      "Extended the V2 UI architecture across two onboarding flows, refactoring 700+ lines while preserving backward compatibility for five existing brands.",
+      "Implemented FOIR enforcement in the CAM Calculator, blocking 15+ non-compliant loan approvals in its first month.",
+    ],
+    metrics: [
+      { value: "60%", label: "less manual payment processing" },
+      { value: "90%", label: "redundant API calls eliminated" },
+      { value: "15GB+", label: "data migrated to S3", detail: "40% lower storage cost" },
+    ],
+    stack: [
+      "React 18",
+      "TypeScript",
+      "Redux",
+      "NestJS",
+      "PostgreSQL",
+      "Prisma ORM",
+      "AWS S3",
+      "Docker",
+    ],
+  },
+  {
+    id: "cognitbotz-full-stack-developer",
+    role: "Full Stack Developer",
+    company: "Cognitbotz",
+    location: "Hyderabad, India",
+    start: "2025-02",
+    end: "2026-02",
+    displayPeriod: "Feb 2025 – Feb 2026",
+    type: "Full-time",
+    summary:
+      "FastAPI microservices and LLM evaluation pipelines behind an enterprise applicant tracking system.",
+    highlights: [
+      "Built FastAPI microservices for an enterprise ATS processing 500+ resumes/day at 95% uptime across a six-month period.",
+      "Developed a semantic matching pipeline using Sentence Transformers and pgvector, achieving sub-second query latency across 200+ candidate pools.",
+      "Reduced resume evaluation latency from 12s to 2.5s by moving work into async background workers handling 50+ concurrent requests.",
+      "Integrated Groq LLaMA3 and OpenAI GPT-4 with Pydantic validation, holding 99.2% structured-output reliability across 10K+ API calls.",
+      "Containerised five backend services with Docker and GitHub Actions CI/CD, cutting deployment time from 45 minutes to 8.",
+    ],
+    metrics: [
+      { value: "500+", label: "resumes processed per day", detail: "95% uptime over 6 months" },
+      { value: "99.2%", label: "structured-output reliability", detail: "across 10K+ LLM calls" },
+    ],
+    deltas: [
+      { before: "12s", after: "2.5s", label: "resume evaluation latency" },
+      { before: "45min", after: "8min", label: "deployment time" },
+    ],
+    stack: [
+      "FastAPI",
+      "Python",
+      "PostgreSQL",
+      "pgvector",
+      "MongoDB",
+      "Sentence Transformers",
+      "Groq LLaMA3",
+      "OpenAI GPT-4",
+      "Docker",
+      "GitHub Actions",
+    ],
+  },
+  {
+    id: "cognitbotz-frontend-intern",
+    role: "Frontend Developer (Intern)",
+    company: "Cognitbotz",
+    location: "Hyderabad, India",
+    start: "2024-10",
+    end: "2025-02",
+    displayPeriod: "Oct 2024 – Feb 2025",
+    type: "Internship",
+    summary: "Reusable React component work on the recruiter-facing product.",
+    highlights: [
+      "Built 15+ reusable React components with JWT authentication, contributing to three sprint releases.",
+      "Optimised a recruiter dashboard rendering 500+ candidate records, reducing load time from 4.2s to 1.1s via virtualisation.",
+    ],
+    deltas: [{ before: "4.2s", after: "1.1s", label: "recruiter dashboard load" }],
+    stack: ["React", "JavaScript", "Bootstrap", "JWT"],
+  },
+];

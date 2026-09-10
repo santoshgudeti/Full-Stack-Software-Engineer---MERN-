@@ -1,25 +1,8 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Target, Users, Lightbulb } from "lucide-react";
-
-const highlights = [
-  {
-    icon: Target,
-    title: "Strong Ownership Mindset",
-    description: "Excellent debugging and problem-solving skills with a focus on delivering high-quality solutions",
-  },
-  {
-    icon: Users,
-    title: "AI-Enabled Systems",
-    description: "Experience delivering AI-enabled systems used by internal teams and clients in production environments",
-  },
-  {
-    icon: Lightbulb,
-    title: "Passionate About Innovation",
-    description: "Deeply passionate about Applied AI, scalable backend systems, and real-time architecture",
-  },
-];
+import { Icon } from "@/components/common/Icon";
+import { highlights } from "@/content";
 
 const Highlights = () => {
   const ref = useRef(null);
@@ -50,7 +33,10 @@ const Highlights = () => {
                 className="glass-card p-6 text-center group hover:border-primary/30 transition-colors"
               >
                 <div className="inline-flex p-4 rounded-xl bg-secondary group-hover:bg-primary/20 transition-colors mb-4">
-                  <item.icon className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors" />
+                  <Icon
+                    name={item.icon}
+                    className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors"
+                  />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
                 <p className="text-sm text-muted-foreground">{item.description}</p>

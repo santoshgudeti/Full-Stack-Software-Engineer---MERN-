@@ -1,44 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Code, Database, Server, Wrench, Globe, MapPin } from "lucide-react";
-
-const skillCategories = [
-  {
-    title: "Languages",
-    icon: Code,
-    skills: ["JavaScript (ES6+)", "TypeScript (Working Knowledge)", "Java (OCA Certified)"],
-  },
-  {
-    title: "Frontend",
-    icon: Globe,
-    skills: ["React.js", "Next.js (Exposure)", "HTML5", "CSS3", "Bootstrap", "Tailwind CSS", "shadcn/ui"],
-  },
-  {
-    title: "Backend",
-    icon: Server,
-    skills: ["Node.js", "Express.js", "REST API Development", "JWT Authentication"],
-  },
-  {
-    title: "Databases",
-    icon: Database,
-    skills: ["MongoDB", "PostgreSQL (Fundamentals)", "Redis"],
-  },
-  {
-    title: "Real-Time & Maps",
-    icon: MapPin,
-    skills: ["WebSockets", "Socket.IO", "Google Maps APIs"],
-  },
-  {
-    title: "Integrations",
-    icon: Wrench,
-    skills: ["External AI Evaluation Services", "Audio/Video/Text Processing", "REST-Based Service Integrations"],
-  },
-  {
-    title: "Tools",
-    icon: Wrench,
-    skills: ["Git", "GitHub", "Postman", "Docker (Fundamentals)", "VS Code"],
-  },
-];
+import { Icon } from "@/components/common/Icon";
+import { skillCategories } from "@/content";
 
 const Skills = () => {
   const ref = useRef(null);
@@ -82,13 +45,13 @@ const Skills = () => {
           <motion.div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {skillCategories.map((category) => (
               <motion.div
-                key={category.title}
+                key={category.id}
                 variants={cardVariants}
                 className="glass-card p-6 hover:border-primary/30 transition-colors duration-200"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 rounded-lg bg-secondary">
-                    <category.icon className="w-5 h-5 text-muted-foreground" />
+                    <Icon name={category.icon} className="w-5 h-5 text-muted-foreground" />
                   </div>
                   <h3 className="font-semibold text-foreground">
                     {category.title}

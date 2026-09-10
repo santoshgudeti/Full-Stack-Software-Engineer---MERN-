@@ -1,13 +1,6 @@
-import { Download, Github, Linkedin, Mail } from "lucide-react";
-
-const quickLinks = [
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
-  { label: "Education", href: "#education" },
-  { label: "Contact", href: "#contact" },
-];
+import { Download } from "lucide-react";
+import { Icon } from "@/components/common/Icon";
+import { profile, site } from "@/content";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -19,10 +12,10 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <a href="#" className="text-2xl font-bold gradient-text">
-              G. Santosh
+              {profile.name}
             </a>
             <p className="text-sm text-muted-foreground mt-2">
-              Full Stack Software Engineer (MERN Stack)
+              {profile.headline} · {profile.subHeadline}
             </p>
           </div>
 
@@ -30,10 +23,10 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Quick Links</h4>
             <div className="grid grid-cols-2 gap-2">
-              {quickLinks.map((link) => (
+              {site.nav.map((link) => (
                 <a
-                  key={link.href}
-                  href={link.href}
+                  key={link.to}
+                  href={link.to}
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
                   {link.label}
@@ -46,34 +39,21 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Connect</h4>
             <div className="flex gap-3 mb-4">
-              <a
-                href="https://www.linkedin.com/in/santosh-guddeti-929668216"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-secondary border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={18} />
-              </a>
-              <a
-                href="https://github.com/santoshgudeti"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-secondary border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
-                aria-label="GitHub"
-              >
-                <Github size={18} />
-              </a>
-              <a
-                href="mailto:santoshgudeti@gmail.com"
-                className="p-2 rounded-lg bg-secondary border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
-                aria-label="Email"
-              >
-                <Mail size={18} />
-              </a>
+              {profile.socials.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noopener noreferrer" : undefined}
+                  className="p-2 rounded-lg bg-secondary border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
+                  aria-label={link.label}
+                >
+                  <Icon name={link.icon} size={18} />
+                </a>
+              ))}
             </div>
             <a
-              href="resume.pdf"
+              href={site.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-sm text-primary hover:underline"
@@ -87,10 +67,10 @@ const Footer = () => {
         {/* Copyright */}
         <div className="pt-8 border-t border-border/50 text-center">
           <p className="text-sm text-muted-foreground">
-            © {currentYear} G. Santosh. All rights reserved.
+            © {currentYear} {profile.name}. All rights reserved.
           </p>
           <p className="text-xs text-muted-foreground/60 mt-2">
-            Built with React, TypeScript, Tailwind CSS & Framer Motion
+            Built with React, TypeScript, Tailwind CSS &amp; Framer Motion
           </p>
         </div>
       </div>

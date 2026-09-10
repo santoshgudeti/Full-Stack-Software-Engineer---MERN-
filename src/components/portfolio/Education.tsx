@@ -2,18 +2,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { GraduationCap, Award, Calendar } from "lucide-react";
-
-const education = {
-  degree: "B.Tech in Information Technology",
-  institution: "CVR College of Engineering (JNTU)",
-  period: "2019 – 2023",
-  cgpa: "8.07",
-};
-
-const certifications = [
-  { name: "Oracle Certified Associate – Java SE 8", issuer: "Oracle" },
-  { name: "Google IT Support Certificate", issuer: "Google" },
-];
+import { certifications, education } from "@/content";
 
 const Education = () => {
   const ref = useRef(null);
@@ -50,12 +39,17 @@ const Education = () => {
               </div>
 
               <div className="space-y-4">
-                <h4 className="text-lg font-medium text-foreground">{education.degree}</h4>
-                <p className="text-muted-foreground">{education.institution}</p>
+                <h4 className="text-lg font-medium text-foreground">
+                  {education.degree} in {education.field}
+                </h4>
+                <p className="text-muted-foreground">
+                  {education.institution}
+                  {education.affiliation ? ` (${education.affiliation})` : ""}
+                </p>
                 <div className="flex flex-wrap gap-4 text-sm">
                   <div className="flex items-center gap-2 text-muted-foreground">
                     <Calendar size={14} />
-                    <span>{education.period}</span>
+                    <span>{education.displayPeriod}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-muted-foreground">CGPA:</span>
